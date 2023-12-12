@@ -10,7 +10,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const app = Express()
-const PORT = 3000
+const PORT = 3050
 const corsOptions = {
     origin: "*"
 }
