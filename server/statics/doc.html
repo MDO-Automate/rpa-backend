@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+    	<meta charset="UTF-8">
+    	<title>Documentación de proyecto</title>
+		<style>
+			 body {
+			    font-family: sans-serif;
+			    margin: 0;
+			    padding: 0;
+				font-family: 'Roboto', sans-serif;
+	        }
+
+	        header {
+	        	background-color: #84A215;
+	        	color: #fff;
+                padding: 10px 0;
+	        	text-align: center;
+	        }
+
+	        .container {
+	        	display: flex;
+	        	flex-direction: row;
+	        }
+
+	        nav {
+	        	background-color: #F5F5F5;
+	        	padding: 20px;
+	        	flex-basis: 15%;
+	        	min-height: 100vh;
+	        }
+
+	        main {
+	        	padding: 20px;
+	        	flex-basis: 75%;
+	        }
+			
+	        h1 {
+	        	margin-top: 0;
+	        }
+
+	        h2 {
+	        	margin-top: 30px;
+	        }
+
+	        p {
+	        	line-height: 1.5;
+	        	margin-bottom: 20px;
+	        }
+
+	        ul {
+	        	margin-left: 0;
+	        	padding-left: 20px;
+	        }
+
+	        li {
+	        	margin-bottom: 10px;
+	        }
+
+	        a {
+	        	color: #3d4b0a;
+	        	text-decoration: none;
+	        	font-weight: bold;
+	        	transition: all 0.2s ease-in-out;
+	        }
+
+	        a:hover {
+	        	color: #333;
+	        }
+
+            /* ocultar todas las secciones, excepto la primera */
+            main section:not(:first-of-type) {
+                display: none;
+            }
+
+			.metodos-cheklist{
+				display: flex;
+				flex-direction: column;
+				gap: 30px;
+			}
+			.archivos-extra{
+				margin: 20px 0;
+				background-color: #979797;
+				padding: 20px;
+				border-radius:  10px;
+			}
+
+			.web-instalacion{
+				margin:50px 0;
+			}
+
+			.section-RPACHecklist,
+			.section-clasificacion,
+			.section-RPATFT{
+				margin: 70px 0;
+			}
+		</style>
+    </head>
+    <body>
+	    <header>
+	    	<h1>Redireccionamiento de novedades operacionales</h1>
+	    </header>
+	    <div class="container">
+		<nav>
+			<h3>Secciones</h3>
+			<ul>
+				<li>
+                    <a 
+                        href="#"
+                        onclick="mostrarSeccion('resumen')"
+                    >
+                    Resumen del proyecto
+                </a>
+                </li>
+                <li>
+                    <a 
+                        href="#"
+                        onclick="mostrarSeccion('rpa-python')"
+                    >
+                    RPA Python
+                </a>
+                </li>
+                <li>
+                    <a 
+                        href="#"
+                        onclick="mostrarSeccion('apartado-web')"
+                    >
+                    Apartado Web
+                </a>
+                </li>
+
+				<li>
+                    <a 
+                        href="#"
+                        onclick="mostrarSeccion('monitoreo')"
+                    >
+                    Monitoreo
+                </a>
+                </li>
+				
+			</ul>
+		</nav>
+		<main>
+			<section id="resumen">
+				<h2>Resumen del proyecto</h2>
+				<p>El proyecto consiste en un sistema de RPA que automatiza el proceso de recepción y clasificación de las novedades operacionales entrantes, asignando una prioridad basada en diversos factores como la criticidad y el impacto en la operación. La información es redireccionada automáticamente a los entes interesados correspondientes, como a las áreas de mantenimiento y centro de mando, para su seguimiento y resolución. Con este proyecto, se busca mejorar la eficiencia y la efectividad en la gestión de las novedades operacionales, reducir los tiempos de respuesta y minimizar el impacto en la operación diaria de nuestras rutas alimentadoras.</p>
+	
+		        <h2>Tecnología utilizada</h2>
+                <p>El proyecto, en términos técnicos, está construido con diversas tecnologías modernas y eficientes. El sistema de RPA se desarrolló utilizando la tecnología de Python, lo que permite una programación más sencilla y una mayor flexibilidad en el desarrollo. Además, el backend o servidor está construido con Express NodeJS, una plataforma de aplicaciones web rápida y escalable que facilita la comunicación entre los diferentes componentes del sistema. Por último, se utilizó la tecnología de ReactJS para construir la interfaz de usuario, lo que ofrece una experiencia de usuario más fluida y amigable. En conjunto, estas tecnologías proporcionan una solución completa y efectiva para la automatización del proceso.</p>
+
+            </section>
+            <section id="rpa-python">
+				<!-- Introducción -->
+				<h2>RPA Python</h2>
+				<p>Este módulo del proyecto es el más importante ya que es donde se realiza la recepción, clasificación y transmisión de las novedades. Se usan en conjunto las librerías de pywinauto y pyautogui para realizar acciones de RPA.</p>
+				<p>Se encuentra compuesto por 3 flujos de trabajo que se van efectuando de forma secuencial.</p>
+				<ul>
+					<li><a href="#section-RPATFT">TFT RPA</a></li> 
+					<li><a href="#section-RPACHecklist">CheckList RPA</a></li> 
+					<li><a href="#section-clasificacion">clasificación</a></li> 
+				</ul>
+
+				<!-- TFT RPA -->
+				<div id="section-RPATFT" class="section-RPATFT">
+					<h2 id="tftRPA">TFT RPA:</h2>
+					<p>En este flujo se realiza la recepción de las novedades entrantes por la TFT con la siguiente secuencia:</p>
+					<ul>
+						<li>Abre la ventana de la bandeja de entrada de mensajes de la TFT.</li>
+						<li>Toma ScreenShot al texto de la bandeja de entrada.</li>
+						<li>Toma el texto de la ScreenShot y lo estructura por fecha, hora, unidad, mensaje.</li>
+						<li>Guarda la información estructurada en la tabla TFT.</li>
+						<li>Almacena la información estructurada en un almacenamiento temporal (variable).</li>
+					</ul>
+
+					<!-- Estructura  TFT RPA-->
+					<h2>Estructura de RPA en Python</h2>
+					<p><strong>tftRPA():</strong> toma una captura de pantalla de la bandeja de entrada de la TFT, la procesa utilizando OCR (Optical Character Recognition) y extrae el texto de la imagen. Luego, divide el texto en líneas y llama a <em>insertText</em> para cada una de ellas. La función también maneja las excepciones si no se puede encontrar la ventana de la bandeja de entrada.</p>
+					<p><strong>insertText(indexText):</strong> toma un texto como entrada y verifica si contiene la cadena "MDO". Si es así, elimina caracteres raros del texto y luego extrae la fecha, la hora, el mensaje y el número de unidad del texto. Luego, guarda estos valores en un diccionario y los inserta en una base de datos llamando a <em>InserIntoQuery</em>. Si ocurre algún error, escribe el texto limpio en un archivo de errores.</p>
+					<p>Algunos métodos usados en el flujo de trabajo:</p>
+					<blockquote>
+						<p><b>match(regex, texto):</b>esta función toma dos argumentos, un patrón de expresión regular y un texto, y devuelve el primer resultado de una búsqueda que coincida con el patrón en el texto. Se utiliza en otras funciones para buscar patrones específicos en el mensaje de la TFT.</p>			
+						<p><b>getTextMessage(texto):</b> esta función toma un argumento, el texto completo de un mensaje de la TFT, y devuelve solo el mensaje enviado en la TFT. La función busca patrones específicos en el texto para separar el mensaje del resto de la información en el mensaje.</p>
+						<p><b>getClave(texto):</b> esta función toma un argumento, el texto completo de un mensaje de la TFT, y devuelve la clave del mensaje. Busca el patrón "Clave" en el mensaje y devuelve el valor de la clave. También elimina cualquier carácter no alfanumérico y convierte las letras mayúsculas en minúsculas.</p>
+						<p><b>convertDate(date):</b> esta función toma un argumento, una fecha en formato AA/MM/DD, y la convierte en formato AAAA-MM-DD.</p>
+						<p><b>getDate(texto):</b>esta función toma un argumento, el texto completo de un mensaje de la TFT, y devuelve la fecha en que se envió el mensaje en formato AAAA-MM-DD. Busca un patrón de fecha en el mensaje y lo convierte al formato AAAA-MM-DD.</p>
+						<p><b>getHour(texto):</b> esta función toma un argumento, el texto completo de un mensaje de la TFT, y devuelve la hora a la que se envió el mensaje en formato HH:MM:SS. Busca un patrón de hora en el mensaje y lo devuelve en formato HH:MM:SS.</p>
+					</blockquote>
+				</div>
+				<!-- RPA CHECKLIST	-->
+				<div id="section-RPACHecklist" class="section-RPACHecklist">
+					<h1>RPA CheckList</h1>
+					<p>Este flujo tiene como objetivo recibir las novedades del CheckList a través de correos electrónicos.
+						Se encarga de leer los correos entrantes de la dirección rpa.mdo@mdosas.com.co y selecciona
+						únicamente aquellos que estén relacionados con las novedades del CheckList. El flujo realiza la
+						siguiente secuencia:</p>
+					<ul>
+						<li>Toma los mensajes no leidos del correo relacionados con las novedades del checkList y los marca
+							como leidos.</li>
+						<li>Estructura las novedades por fecha, hora, unidad, clave y descripción.</li>
+						<li>Guarda la información estructurada en la tabla <code>NovCheckList</code>.</li>
+						<li>Almacena la información estructurada en una lista temporal (Variable Array).</li>
+					</ul>
+					<h2>Estructura de flujo en python</h2>
+					<p><strong>CheckListRPA()</strong>: se encarga de procesar correos electrónicos no leídos con una
+						palabra clave específica en el asunto, extraer información relevante de su contenido y almacenarla
+						en una base de datos. Para ello, recorre cada correo y analiza su estructura y contenido. Si
+						encuentra información válida, la procesa y la guarda en una base de datos. En caso de no encontrar
+						ningún correo con la palabra clave, la función termina sin realizar ninguna acción.</p>
+					<p>Metodos usados:</p>
+					<ul class="metodos-cheklist">
+						<li><strong>connectMail()</strong>: Esta función se utiliza para establecer una conexión con el
+							servidor de correo electrónico IMAP4_SSL, autenticarse con las credenciales del correo emisor y
+							seleccionar la carpeta de entrada (inbox). Devuelve la conexión establecida con el servidor de
+							correo. Si no se puede establecer una conexión, se imprimirá un mensaje de error.</li>
+						<li><strong>getMessageIds(mail, filter)</strong>: Esta función se utiliza para obtener los ID de los
+							mensajes no leídos que cumplen con un filtro específico en la bandeja de entrada seleccionada.
+							Devuelve una lista de ID de mensajes encontrados.</li>
+						<ul>
+							<li><strong>mail (IMAP4_SSL)</strong>: Conexión establecida con el servidor de correo
+								electrónico.</li>
+							<li><strong>filter (str)</strong>: Filtro que se aplicará para buscar los mensajes. Ejemplo:
+								"UNSEEN".</li>
+							<li><strong>Retorno:</strong></li>
+							<ul>
+								<li>ids_msg_split (list): Lista de ID de mensajes encontrados.</li>
+							</ul>
+						</ul>
+						<li>
+							<strong>getStructureMail(mail, id_mail)</strong>: Esta función se utiliza para obtener la
+							estructura de un mensaje específico identificado por su ID. Devuelve el asunto y la fecha del
+							mensaje, junto
+							con su estructura de contenido (partes de texto y archivos adjuntos).</li>
+						<ul>
+							<li><strong>mail (IMAP4_SSL)</strong>: Conexión establecida con el servidor de correo
+								electrónico.</li>
+							<li><strong>id_mail (str)</strong>: ID del mensaje del cual se desea obtener la estructura.
+							</li>
+							<li><strong>Retorno:</strong></li>
+							<ul>
+								<li>subject (str): Asunto del mensaje.</li>
+								<li>date (datetime): Fecha y hora en la que se recibió el mensaje.</li>
+								<li>content (list): Lista con la estructura del contenido del mensaje (partes de texto y
+									archivos adjuntos).</li>
+							</ul>
+						</ul>
+						<li><strong>getCheckListInfo(mail, id_mail)</strong>: Esta función se utiliza para extraer la
+							información relevante de una novedad del CheckList contenida en un mensaje específico
+							identificado por su ID. Devuelve la información estructurada en un diccionario con las
+							siguientes claves: fecha, hora, unidad, clave y descripción.</li>
+						<ul>
+							<li><strong>mail (IMAP4_SSL)</strong>: Conexión establecida con el servidor de correo
+								electrónico.</li>
+							<li><strong>id_mail (str)</strong>: ID del mensaje que contiene la novedad del CheckList.</li>
+							<li><strong>Retorno:</strong></li>
+							<ul>
+								<li>checklist_info (dict): Diccionario con la información estructurada de la novedad del
+									CheckList. Las claves son "fecha", "hora", "unidad", "clave" y "descripcion".</li>
+							</ul>
+						</ul>
+						<li><strong>saveCheckListInfo(checklist_info)</strong>: Esta función se utiliza para guardar la
+							información estructurada de una novedad del CheckList en una tabla de una base de datos. La
+							tabla se llama "NovCheckList" y tiene los siguientes campos: fecha, hora, unidad, clave y
+							descripción.</li>
+						<ul>
+							<li><strong>checklist_info (dict)</strong>: Diccionario con la información estructurada de la
+								novedad del CheckList.</li>
+							<li><strong>Retorno:</strong></li>
+							<ul>
+								<li>None</li>
+							</ul>
+						</ul>
+						<li><strong>storeCheckListInfo(checklist_info, checklist_list)</strong>: Esta función se utiliza
+							para almacenar la información estructurada de una novedad del CheckList en una lista temporal
+							(Variable Array) llamada "checklist_list".</li>
+						<ul>
+							<li><strong>checklist_info (dict)</strong>: Diccionario con la información estructurada de la
+								novedad del CheckList.</li>
+							<li><strong>checklist_list (list)</strong>: Lista temporal en la que se almacenará la
+								información estructurada de todas las novedades del CheckList procesadas en la ejecución
+								actual del flujo.</li>
+							<li><strong>Retorno:</strong></li>
+							<ul>
+								<li>None</li>
+							</ul>
+						</ul>
+					</ul>
+				</div>   
+				<!-- FLUJO DE CLASIFICACIÓN -->
+				<div id="section-clasificacion" class="section-clasificacion">
+					<h2>Clasificación</h2>
+					<p>Este flujo es una parte esencial del proceso de gestión de novedades. Su objetivo es procesar las novedades entrantes de flujos anteriores y clasificarlas según su nivel de prioridad. Esto se hace mediante la extracción de información específica de las líneas de texto relevantes, como la fecha, hora, unidad y clave. Una vez que se ha identificado la prioridad de la novedad, el flujo la transmite a los entes interesados, como el equipo de mantenimiento o el equipo de CMO. Esta transmisión se realiza a través de una solicitud POST al servidor del proyecto quien es el responsable de transmitir la información en tiempo real al cliente y guardar la información clasificada en la tabla de "novClasificadas" usando la siguiente secuencia:</p>
+					<ul>
+						<li>Recibe la información almacenada en la lista temporal de los flujos anteriores.</li>
+						<li>Realiza una consulta a la tabla de claves para extraer la prioridad y el destinatario.</li>
+						<li>Incluye la prioridad y el destinatario a la estructura de la novedad y la transmite.</li>
+					</ul>
+				</div>
+				<hr>
+				<!-- Instalación de proyecto -->
+				<h2>Instalación</h2>
+   				<p>Para la instalación del proyecto en Python se debe comenzar por la instalación de las dependencias del siguiente archivo.</p>
+   				<a href="#" target="_blank">⬇ requirements.txt </a> 
+   				<p>Ejecutar  <code> $pip install –r &lt;requirements.txt&gt;</code>  en la ubicación del archivo para instalar las dependencias en el entorno en el que se esté trabajando.</p>		
+				<h2>Instalar tesseract</h2>
+				<p> Tesseract es un motor de reconocimiento óptico de caracteres (OCR, por sus siglas en inglés) de código abierto. Es decir, es un software que convierte imágenes de texto en archivos de texto digitalizado.
+				Es utilizado para realizar el reconocimiento de texto en los mensajes de la TFT.</p>				
+				<p>Para la instalación de Tesseract se usa el instalador ubicado en la carpeta <b><code>"Instalador Tesseract"</code></b>  en la raiz del proyecto.</p>
+				<p>Luego, en el archivo <b><code>config.py </code></b> del proyecto se agrega la ruta absoluta donde se encuentra instalado el tesseract.</p>
+				<br>
+				<code>
+						{
+						'pytesseractPath' : r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+						}
+				</code>
+				<br>
+				<br>
+
+				<div class="archivos-extra" >
+					<p><strong>Archivos Extras</strong></p>
+					<hr>
+					<ul>
+	  					<li><strong>Errors.txt:</strong> Se listan los errores que tiene el RPA al momento de reconocer la estructura del texto (fecha, hora, clave, mensaje).</li>
+	  					<li><strong>errorsQuery.txt:</strong> Se listan los errores en las consultas SQL generadas desde el RPA.</li>
+	  					<li><strong>PingSAE.bat:</strong> Intenta establecer conexión con el servidor del SAE cada cierto tiempo, si no se logra establecer conexión envía un correo electrónico.</li>
+	  					<li><strong>Start.bat:</strong> Ejecuta el RPA, este archivo se debe de abrir siempre como administrador.</li>
+					</ul>
+				</div>
+				<hr>
+				<div class="initialization-rpa">
+					<h2>Inicializar RPA</h2>
+
+					<p>Existe un archivo en la carpeta raíz del proyecto RPA en Python que lo inicializa automáticamente.</p>
+
+					<p>Ruta: <strong>C:\Users\rpa.mdo\Documents\Proyecto Redireccion de novedades\RPA-PYTHON</strong> <br>
+					Archivo: <strong>start.bat</strong></p>
+					
+					<p>Por otra parte, es recomendable iniciar el archivo <strong>pingSAE.bat</strong> en la misma ruta del proyecto para tener monitoreada la conexión a la plataforma SAE.</p>
+				</div>
+
+			</section>
+			<section id="apartado-web" class="apartado-web">
+				<h2>Apartado web</h2>
+				<p>El apartado web es una pieza clave del proyecto, ya que en él se almacena, consulta y transmite la información. Además, el servidor también aloja al cliente web que muestra las novedades clasificadas. Las funcionalidades del servidor se dividen en dos aspectos principales: por un lado, permite el acceso a la información mediante la API web, y por otro, facilita el alojamiento del cliente de novedades.</p>
+				<p>Conexiones:</p>
+				<ul>
+				  <li>SSH:</li>
+				  <ul>
+				    <li><strong>$</strong>ssh 192.168.121.5 –l debian</li>
+				  </ul>
+				  <li>SFTP:</li>
+				  <ul>
+				    <li>IP: 192.168.121.5</li>
+				    <li>Puerto: 22</li>
+				    <li>Usuario y contraseña en el archivo de KeePass</li>
+				  </ul>
+				</ul>
+				<div class="web-instalacion">
+					<h3>Instalación</h3>
+					<p>Para empezar con la instalación del proyecto primero se debe tener instalado NodeJs.</p>
+					<p>Para instalar nodejs primero se empieza instalando el paquete de instalación de la versión 18 de nodejs.</p>
+					<code>$curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh</code>
+					<p>Luego actualizar el manejador de paquetes del sistema operativo.</p>
+					<code>$apt-get update && apt-get upgrade</code>
+					<p>Por último, instalar el paquete de nodejs.</p>
+					<code>$apt-get install nodejs</code>
+				</div>		
+
+				<div class="web-instalacion-paquetes">
+					<h3>Instalación de paquetes</h3>
+
+					<p>Para instalar los paquetes necesarios para el proyecto, se debe ubicar en el directorio raíz al nivel del archivo index.ts  y ejecutar el comando <br> <code>$npm install</code></p>
+
+					<h3>Pasar proyecto a producción</h3>
+					<p>El proyecto se encuentra construido con typescript, nuestros navegadores solo interpretan HTML, CSS y Javascript, en este proceso se transpilará el código a javascript para ser usado en producción.</p>
+					<p>Se usa el siguiente comando: <br><code>$npm run start:build</code></p>
+					<p>Esto creará una carpeta en llamada Build en el directorio raíz del proyecto, aquí vamos a crear una carpeta llamada logs para los logs de errores del aplicativo.</p>
+					<p>Usar el comando para crear el directorio. <br> <code>$mkdir logs</code></p>
+					<p>Una vez creado este directorio, creamos un archivo llamado api.txt dentro de este directorio.</p>
+
+				</div>
+
+				<div class="web-iniciar-servicios">
+					<br>
+					<h3>Iniciar servicio</h3>
+					<p>Para iniciar el servicio web nos ubicamos en la raíz del proyecto y ejecutamos:</p>
+					<pre><code>$nohup npm start &amp; </code></pre>
+					<br>
+					<h3>Integrar cliente con el servidor</h3>
+					<p>Para integrar el frontend con el backend nos iremos al proyecto del frontend y en el directorio raíz del mismo para generar el código de producción:</p>
+					<pre><code>$npm run build</code></pre>
+					<p>Esto nos generará una carpeta llamada Build en la raíz el mismo. Para integrar este código al backend movemos los archivos de producción del frontend al directorio public en la raiz del proyecto del backend.</p>
+				</div>
+			</section>
+			<section class="monitoreo" id="monitoreo">
+				<h2>Monitoreo de dispositivos</h2> 
+				<h3>SAE: </h3>
+				<p>El sistema SAE está siendo monitorizado con un script batch de Windows localizado en la ruta <strong>C:\Users\rpa.mdo\Documents\Proyecto Redireccion de novedades\RPA-PYTHON\pingSAE.bat</strong> del dispositivo RPA.</p>
+				<p>Se ejecuta cada 5 minutos diariamente, la gestión de la ejecución se encuentra en el programador de tareas de windows.</p>
+				<h3>Dispositivo RPA:</h3> 
+				El dispositivo RPA se le está realizando monitoreo de disponibilidad desde un script .sh desde la máquina virtual Debian en la ruta <strong>/home/debian/EmailAlert</strong> , El directorio contiene el .sh y .txt. Siendo el .sh el script de ejecución y el .txt la información del correo a enviar.</p>
+				<p><strong>To:</strong> rpa.mdo@mdosas.com.co<br>
+				<strong>From:</strong> rpa.mdo@mdosas.com.co<br>
+				<strong>Subject:</strong> ERROR DISPOSITIVO RPA</p>
+				<p>El dispositivo RPA se encuentra fuera de linea, verifica si se encuentra encendido o si hay problemas de conectividad. Por favor, tomar acciones para solucionar el problema.</p>
+			</section>
+        </main>
+        </div>
+        <script>
+            function mostrarSeccion(id) {
+                // ocultar todas las secciones
+                var secciones = document.getElementsByTagName("section");
+                for (var i = 0; i < secciones.length; i++) {
+                    secciones[i].style.display = "none";
+                }
+                // mostrar la sección correspondiente
+                var seccion = document.getElementById(id);
+                seccion.style.display = "block";
+            }
+        </script>
+    </body>
+</html>
